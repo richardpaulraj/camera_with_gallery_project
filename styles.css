@@ -1,0 +1,87 @@
+*{
+    box-sizing: border-box;
+}
+body{
+    padding: 0;
+    margin: 0;
+}
+.video-cont{
+    width: 100vw;
+    height: 100vh;
+    background-color: black;
+}
+video{
+    width: 100%;
+    height: 100%;
+}
+.actions-cont{
+    height:12rem;
+    width: 5rem;
+    /* background-color: lightblue; */
+    position: absolute;
+    top: calc( (100vh - 12rem) / 2 );
+    right:5rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+.actions-cont > * {
+    width: 100%;
+    height: 5rem;
+    border-radius: 50%;
+    border: 5px solid white;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+}
+.capture-btn{
+    background-color: white;
+    width: 3rem;
+    height: 3rem;
+    border-radius: 50%;
+}
+.record-btn{
+    background-color: red;
+    width: 3rem;
+    height: 3rem;
+    border-radius: 50%;
+}
+.scale-record{
+    animation-name : scale-record;
+    animation-iteration-count: infinite; /* Countiounsly this animation will kepp on running */
+    animation-duration: 1s;
+}
+@keyframes scale-record {
+    0%{
+        transform: scale(0.8);
+    }
+    100%{
+        transform: scale(1.1);
+    }
+}
+
+.scale-capture{
+    animation-name : scale-capture;
+    animation-iteration-count: 1; 
+    animation-duration: 0.2s;
+}
+@keyframes scale-capture {
+    0%{
+        transform: scale(0.5);
+    }
+    100%{
+        transform: scale(1);
+    }
+}
+
+.timer-cont{
+    position: absolute;
+    top:0;
+    left:0;
+    color:aliceblue;
+    font-size: 0.5rem;
+}
+.timer{
+    display: none;
+}
