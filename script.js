@@ -2,6 +2,8 @@ let video = document.querySelector('video')
 let recordBtnCont = document.querySelector('.record-btn-cont')
 let captureBtnCont = document.querySelector('.capture-btn-cont')
 
+let filterColor = 'transparent'
+
 //Flags
 let recordFlag = false;
 
@@ -60,6 +62,32 @@ recordBtnCont.addEventListener('click', (e)=>{
     }
 })
 
+captureBtnCont.addEventListener('click', (e)=>{
+    let canvas = document.createElement('canvas')
+
+    canvas.width = video.videoWidth;
+    canvas.height = video.videoHeight;
+
+    let tool = canvas.getContext('2d')
+    tool.drawImage(video,0,0, video.videoWidth, video.videoHeight)
+
+    //Filtering
+    tool.fillStyle = filterColor
+    tool.fillRect(0,0,canvas.width, canvas.height)
+
+    let imageURL = canvas.toDataURL() //toDataURL() is to to convert img into URL i think
+
+    //To download -- Method
+    let a = document.createElement('a')
+    a.href = imageURL
+    a.download = 'image.jpg'
+    a.click()
+
+})
+
+
+
+
 let timerID;
 let counter = 0; //Represents total seconds
 let timer = document.querySelector('.timer')
@@ -83,13 +111,13 @@ function startTimer(){
         minutes = minutes < 10 ? `0${minutes}` : minutes
         seconds = seconds < 10 ? `0${seconds}` : seconds
 
-        timer.style.display = 'block' //Initially its hidden now it should be visible
+        timer.style.display = 'block' //Initially its hidden, now it should be visible
 
         timer.innerText = `${hours}:${minutes}:${seconds}`
 
         counter++
 
-        console.log({hours, minutes, seconds})
+        // console.log({hours, minutes, seconds})
 
     }
     timerID = setInterval(displayTimer, 1000) //why I added timerID outside is because I also have to clearInterval in the stopTimer()
@@ -100,4 +128,17 @@ function stopTimer(){
     timer.innerText = '00:00:00'
     timer.style.display = 'none'
 }
+
+//Filtering Logic
+
+let filterLayer = document.querySelector('.filter-layer');
+let allFilter = document.querySelectorAll('.filter');
+
+allFilter.forEach((filterElem)=>{
+    filterElem.addEventListener('click',(e)=>{
+        filterColor = window.getComputedStyle(filterElem).getPropertyValue('background-color') //to get the color
+        filterLayer.style.backgroundColor = filterColor //to set the color 
+    })
+})
+
 
