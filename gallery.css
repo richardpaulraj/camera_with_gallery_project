@@ -1,0 +1,70 @@
+*{
+    box-sizing: border-box;
+}
+
+body{
+    margin: 0;
+    padding: 0;
+}
+
+.back{
+    width: 4rem;
+    height: 4rem;
+    border-radius: 50%;
+    background-color: black;
+    color: white;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: fixed;
+    bottom: 4rem;
+    right: 5rem;
+}
+
+.back:hover{
+    cursor: pointer;
+}
+
+.gallery-cont{
+    background-color: #0096882e;
+    min-height: 100vh;
+    width: 100vw;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+
+.media-cont{
+    width: 15rem;
+    height: 15rem;
+    border: 10px solid white;
+    margin:2rem;
+}
+.media{
+    height: calc(100% - 2rem - 2rem);
+}
+
+.media * { /*why I am adding this is because the video was very big and out of the defined box */
+    width: 100%;
+    height: 100%;
+
+    object-fit: fill; /*This will fill all the extra 1 or 2 px gaps if it has*/
+}
+
+.action-btn{
+    height: 2rem;
+    background-color: black;
+    color: white;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    user-select: none;
+}
+
+.download{
+    background-color: green;
+}
+.delete{
+    background-color: red;
+}

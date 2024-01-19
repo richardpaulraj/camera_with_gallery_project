@@ -3,6 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet"> <!--this is for than gallery icon cdn-->
     <link rel="stylesheet" href="styles.css">
     <title>Camera_Gallery_Project</title>
 </head>
@@ -36,7 +37,20 @@
 
     <div class="filter-layer"></div>
 
+    <span class="material-icons gallery">
+        collections
+    </span>
 
+
+    <script src="https://unpkg.com/shortid-dist@1.0.5/dist/shortid-2.2.13.min.js"></script> <!-- external package used to create ID -->
+    <script src="db.js"></script>
     <script src="script.js"></script>
+
+    <script>
+        let gallery = document.querySelector('.gallery')
+        gallery.addEventListener('click', (e)=>{
+            location.assign('./gallery.html')
+        })
+    </script>
 </body>
 </html>

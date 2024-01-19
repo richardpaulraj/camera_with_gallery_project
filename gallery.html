@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="gallery.css">
+    <title>Gallery</title>
+</head>
+<body>
+    <div class="back">BACK</div>
+    <div class="gallery-cont">
+
+        <!-- Removed this because I created it in the gallery.js file for all the elem present in db -->
+
+        <!-- <div class="media-cont">
+            <div class="media">
+                <video loop autoplay src="video.mp4"></video>
+            </div>
+            <div class="delete action-btn">DELETE</div>
+            <div class="download action-btn">DOWNLOAD</div>
+        </div> -->
+    </div>
+
+    <script src="db.js"></script> <!--Because without this DB access you cannot run so its needed-->
+
+    <script src="gallery.js"></script>
+
+    <script>
+        let backElem = document.querySelector('.back')
+        backElem.addEventListener('click',(e)=>{
+            location.assign('./index.html')
+        })
+    </script>
+</body>
+</html>

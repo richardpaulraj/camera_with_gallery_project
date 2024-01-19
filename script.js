@@ -34,11 +34,23 @@ navigator.mediaDevices.getUserMedia(constraints)
     recorder.addEventListener('stop',(e)=>{
         //Conversion of media chunks data to video
         let blob = new Blob(chunks, {type: 'video/mp4'})
-        let videoURL = URL.createObjectURL(blob) //Window provides a global URL Object
-        let a = document.createElement('a') //To download the Video
-        a.href = videoURL
-        a.download = 'stream.mp4' //The download attribute is used to specify that the target will be downloaded when a user clicks on the hyperlink
-        a.click()
+
+        if(db){
+            let videoID = shortid()
+            let dbTransaction = db.transaction('video', 'readwrite') //here we have to add the name 'video' which is used to create and the second is option read or readwrite
+            let videoStore = dbTransaction.objectStore('video')
+            let videoEntry = {
+                id: `vid-${videoID}`, // see the name 'id' should be same as the name which you have given in the keypath while creating objectStore
+                blobData : blob
+            }
+            videoStore.add(videoEntry)
+        }
+
+        // let videoURL = URL.createObjectURL(blob) //Window provides a global URL Object
+        // let a = document.createElement('a') //To download the Video
+        // a.href = videoURL
+        // a.download = 'stream.mp4' //The download attribute is used to specify that the target will be downloaded when a user clicks on the hyperlink
+        // a.click()
     })
  })
 
@@ -63,6 +75,9 @@ recordBtnCont.addEventListener('click', (e)=>{
 })
 
 captureBtnCont.addEventListener('click', (e)=>{
+
+    captureBtn.classList.add('scale-capture')
+
     let canvas = document.createElement('canvas')
 
     canvas.width = video.videoWidth;
@@ -77,11 +92,26 @@ captureBtnCont.addEventListener('click', (e)=>{
 
     let imageURL = canvas.toDataURL() //toDataURL() is to to convert img into URL i think
 
+    if(db){
+        let imageID = shortid()
+        let dbTransaction = db.transaction('image', 'readwrite') 
+        let imageStore = dbTransaction.objectStore('image')
+        let imageEntry = {
+            id: `img-${imageID}`, // see the name 'id' should be same as the name which you have given in the keypath while creating objectStore
+            url: imageURL
+        }
+        imageStore.add(imageEntry)
+    }
+
     //To download -- Method
-    let a = document.createElement('a')
-    a.href = imageURL
-    a.download = 'image.jpg'
-    a.click()
+    // let a = document.createElement('a')
+    // a.href = imageURL
+    // a.download = 'image.jpg'
+    // a.click()
+
+    setTimeout(()=>{
+        captureBtn.classList.remove('scale-capture')
+    },200) //In future you can change this and implement it only via css
 
 })
 

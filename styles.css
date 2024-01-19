@@ -78,8 +78,8 @@ video{
 
 .timer-cont{
     position: absolute;
-    top:0;
-    left:0;
+    top:calc((100vh / 2) - 8rem);
+    right:5.5rem;
     color:aliceblue;
     font-size: 0.5rem;
 }
@@ -123,4 +123,19 @@ video{
     height: 100vh;
     width: 100vw;
     z-index: 1;
+}
+
+.material-icons{
+    color: white;
+    font-size: xxx-large;
+}
+.gallery{
+    position: absolute;
+    right: 6rem;
+    bottom: 10rem;
+    z-index: 2;
+}
+
+.gallery:hover{
+    cursor: pointer;
 }
